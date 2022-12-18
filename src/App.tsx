@@ -40,13 +40,13 @@ const DUMMY_DATA = [
   },
 ];
 
-// interface Post {
-//   id: number;
-//   title: string;
-//   content: string;
-// }
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+}
 const App = () => {
-  const [post, setPost] = React.useState(DUMMY_DATA);
+  const [post, setPost] = React.useState<Post[]>(DUMMY_DATA);
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
 
