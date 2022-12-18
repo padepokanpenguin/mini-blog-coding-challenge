@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 interface PostProps {
-  id: number;
   title: string;
   content: string;
   editPost: () => void;
@@ -13,7 +12,7 @@ const Content = styled.p`
   overflow: hidden;
 `;
 
-const Post = ({ id, title, content, editPost, deletePost }: PostProps) => {
+const Post = ({ title, content, editPost, deletePost }: PostProps) => {
   return (
     <div className="col-4 mt-3">
       <h4>{title}</h4>

@@ -1,60 +1,24 @@
 import React from "react";
 import Post from "./components/post";
 
-const DUMMY_DATA = [
-  {
-    id: 1,
-    title: "Babel",
-    content:
-      "Babel merupakan tools open-source yang digunakan untuk mengubah sintaks ECMAScript 2015+ menjadi sintaks yang didukung oleh JavaScript engine versi lama. Babel sering dipakai ketika kita menggunakan sintaks terbaru termasuk sintaks JSX.",
-  },
-  {
-    id: 2,
-    title: "Functional Component",
-    content:
-      "Functional component merupakan React component yang dibuat menggunakan fungsi JavaScript. Agar fungsi JavaScript dapat disebut component ia harus mengembalikan React element dan dipanggil layaknya React component.",
-  },
-  {
-    id: 3,
-    title: "Modularization",
-    content:
-      "Dalam konteks pemrograman JavaScript, modularization merupakan teknik dalam memecah atau menggunakan kode dalam berkas JavaScript secara terpisah berdasarkan tanggung jawabnya masing-masing.",
-  },
-  {
-    id: 4,
-    title: "Lifecycle",
-    content:
-      "Dalam konteks React component, lifecycle merupakan kumpulan method yang menjadi siklus hidup mulai dari component dibuat (constructor), dicetak (render), pasca-cetak (componentDidMount), dan sebagainya. ",
-  },
-  {
-    id: 5,
-    title: "ESM",
-    content:
-      "ESM (ECMAScript Module) merupakan format modularisasi standar JavaScript.",
-  },
-  {
-    id: 6,
-    title: "Module Bundler",
-    content:
-      "Dalam konteks pemrograman JavaScript, module bundler merupakan tools yang digunakan untuk menggabungkan seluruh modul JavaScript yang digunakan oleh aplikasi menjadi satu berkas.",
-  },
-];
-
-interface Post {
+interface PostType {
   id: number;
   title: string;
   content: string;
 }
 const App = () => {
-  const [post, setPost] = React.useState<Post[]>(DUMMY_DATA);
+  const [post, setPost] = React.useState<PostType[]>([]);
   const [title, setTitle] = React.useState("");
   const [content, setContent] = React.useState("");
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setPost((prev: any) => [...prev, { title, content }]);
+    setPost((prev: any) => [...prev, { id: +new Date(), title, content }]);
+    setTitle("");
+    setContent("");
   };
 
+  console.info(post);
   const inputTitleHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value);
   };
@@ -106,13 +70,12 @@ const App = () => {
       </form>
       <br />
       <div className="row">
-        {post.map((p, i) => (
+        {post.map((p) => (
           <Post
             key={p.id}
             title={p.title}
             content={p.content}
             editPost={() => editPost(p.id)}
-            id={i + 1}
             deletePost={() => deletePost(p.id)}
           />
         ))}
